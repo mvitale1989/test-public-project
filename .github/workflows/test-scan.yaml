@@ -29,10 +29,10 @@ jobs:
 
       - name: cd/scan-image
         run: |
-          ./wizcli docker scan --image mattermostdevelopment/mattermost-team-edition:${{ github.event.inputs.sha }} -f sarif > results_image_scan.sarif
+          ./wizcli docker scan --image mattermostdevelopment/mattermost-team-edition:${{ github.event.inputs.sha }} 
         continue-on-error: true
 
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: results_image_scan.sarif
+      # - name: Upload SARIF file
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: results_image_scan.sarif
