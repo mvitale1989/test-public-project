@@ -19,6 +19,10 @@ jobs:
           WIZ_CLIENT_ID: ${{ secrets.WIZ_DEVOPS_CLIENT_ID }}
           WIZ_CLIENT_SECRET: ${{ secrets.WIZ_DEVOPS_CLIENT_SECRET }}
 
+      - name: Download Docker Image
+        run: |
+          docker pull mattermostdevelopment/mattermost-team-edition:${{ github.event.inputs.sha }}
+
       - name: cd/scan-image
         run: |
           ./wizcli docker scan --image mattermostdevelopment/mattermost-team-edition:${{ github.event.inputs.sha }} -f sarif > results_image_scan.sarif
