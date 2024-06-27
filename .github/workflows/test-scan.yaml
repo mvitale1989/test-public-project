@@ -7,6 +7,10 @@ on:
         description: 'shatoscan'
         required: true
 
+permissions:
+  contents: read
+  security-events: write
+
 jobs:
   test-scan:
     runs-on: ubuntu-22.04
@@ -32,6 +36,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results_image_scan.sarif
-
-
-
