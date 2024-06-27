@@ -25,11 +25,11 @@ jobs:
 
       - name: Download Docker Image
         run: |
-          docker pull mattermostdevelopment/mattermost-team-edition:${{ github.event.inputs.sha }}
+          docker pull mattermost/mattermost-enterprise-edition:${{ github.event.inputs.sha }}
 
       - name: cd/scan-image
         run: |
-          ./wizcli docker scan --image mattermostdevelopment/mattermost-team-edition:${{ github.event.inputs.sha }} 
+          ./wizcli docker scan --image mattermost/mattermost-enterprise-edition:${{ github.event.inputs.sha }} 
         continue-on-error: true
 
       # - name: Upload SARIF file
