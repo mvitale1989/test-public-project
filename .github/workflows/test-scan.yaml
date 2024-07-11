@@ -22,7 +22,7 @@ jobs:
         env:
           WIZ_CLIENT_ID: ${{ secrets.WIZ_DEVOPS_CLIENT_ID }}
           WIZ_CLIENT_SECRET: ${{ secrets.WIZ_DEVOPS_CLIENT_SECRET }}
-          VULNERABILITY_POLICY: "DevOps Vulnerabilities Policy" 
+
 
       - name: Download Docker Image
         run: |
@@ -31,7 +31,8 @@ jobs:
       - name: cd/scan-image
         run: |
           ./wizcli docker scan --image mattermost/mattermost-enterprise-edition:${{ github.event.inputs.sha }} 
-        continue-on-error: true
+        env:
+          POLICY: "DevOps Vulnerabilities Policy"
 
       # - name: Upload SARIF file
       #   uses: github/codeql-action/upload-sarif@v3
