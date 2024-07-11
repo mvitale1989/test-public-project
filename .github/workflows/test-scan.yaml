@@ -30,7 +30,7 @@ jobs:
 
       - name: cd/scan-image
         run: |
-          ./wizcli docker scan --image mattermost/mattermost-enterprise-edition:${{ github.event.inputs.sha }} 
+          ./wizcli docker scan --image mattermost/mattermost-enterprise-edition:${{ github.event.inputs.sha }} --policy $POLICY
         env:
           POLICY: "DevOps Vulnerabilities Policy"
 
