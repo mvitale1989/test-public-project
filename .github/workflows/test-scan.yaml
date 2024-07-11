@@ -22,6 +22,7 @@ jobs:
         env:
           WIZ_CLIENT_ID: ${{ secrets.WIZ_DEVOPS_CLIENT_ID }}
           WIZ_CLIENT_SECRET: ${{ secrets.WIZ_DEVOPS_CLIENT_SECRET }}
+          VULNERABILITY_POLICY: "DevOps Vulnerabilities Policy" 
 
       - name: Download Docker Image
         run: |
