@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - fix-calls-test-testbranch
   pull_request:
 
 jobs:
@@ -13,13 +14,13 @@ jobs:
     steps:
       - name: test-fork/test
         env:
+          GITHUB_HEAD_REPO_FORK: "${{ github.event.pull_request.head.repo.fork }}"
           GITHUB_EVENT_REPO_FULLNAME: "${{ github.event.repository.full_name }}"
           GITHUB_REPO: "${{ github.repository }}"
         run: |
-          for VAR in GITHUB_EVENT_REPO_FULLNAME GITHUB_REPO; do
+          for VAR in GITHUB_HEAD_REPO_FORK GITHUB_EVENT_REPO_FULLNAME GITHUB_REPO; do
             echo "$VAR=${!VAR}"
           done
       - name: Not on a fork
-        if: github.event.repository.full_name == github.repository
+        if: "! github.event.pull_request.head.repo.fork"
         run: echo "Not on a fork"
-
