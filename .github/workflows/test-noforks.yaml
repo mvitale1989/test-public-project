@@ -1,0 +1,25 @@
+---
+name: Test not-from-fork steps
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-fork:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: test-fork/test
+        env:
+          GITHUB_EVENT_REPO_FULLNAME: "${{ github.event.repository.full_name }}"
+          GITHUB_REPO: "${{ github.repository }}"
+        run: |
+          for VAR in GITHUB_EVENT_REPO_FULLNAME GITHUB_REPO; do
+            echo "$VAR=${!VAR}"
+          done
+      - name: Not on a fork
+        if: github.event.repository.full_name == github.repository
+        run: echo "Not on a fork"
+
