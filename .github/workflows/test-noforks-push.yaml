@@ -1,0 +1,18 @@
+---
+name: Test not-from-fork push steps
+
+on:
+  push:
+
+jobs:
+  test-fork:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: test-fork/test
+        env:
+          EVENT: "${{ toJSON(github) }}"
+        run: |
+          jq . <<<"${EVENT}"
+      #- name: Not on a fork
+      #  if: "! github.event.pull_request.head.repo.fork"
+      #  run: echo "Not on a fork"
